@@ -1,0 +1,40 @@
+[package]
+name = "pyrocord"
+version = "0.1.0"
+authors = ["Nadir <chowdhurynadir0@outlook.com>"]
+description = "A Rust-written Discord API Wrapper for Python."
+edition = "2018"
+
+[package.metadata.maturin]
+classifier = [
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Rust",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS :: MacOS X",
+]
+
+[lib]
+name = "pyrocord"
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+http = "0.2.3"
+reqwest = { version = "0.11.1", features = ["json", "trust-dns"] }
+serde = { version = "1.0.123", features = ["derive"] }
+serde_json = "1.0"
+pythonize = "0.13.0"
+futures = "0.3.5"
+num_cpus = "1.13.0"
+smol = "1.2.5"
+async-compat = "0.2.0"
+
+[dependencies.pyo3]
+version = "*"
+features = ["extension-module"]
