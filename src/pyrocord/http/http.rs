@@ -29,7 +29,7 @@ impl HTTPClient {
         HTTPClient { client }
     }
 
-    pub async fn request<T: DeserializeOwned>(self, request: Request) -> Result<T, Error> {
+    pub async fn request<T: DeserializeOwned>(&self, request: Request) -> Result<T, Error> {
         let (method, url) = request.route.resolve();
         let url = format!("{}{}", BASE_URL, url);
 
