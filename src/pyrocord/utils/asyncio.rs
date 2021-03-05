@@ -54,3 +54,7 @@ pub fn wait<U: pyo3::IntoPy<pyo3::Py<pyo3::PyAny>>, T: future::Future<Output = P
 
     Ok(future_rx)
 }
+
+pub fn block<T: future::Future<Output = ()>>(fut: T) {
+    smol::block_on(Compat::new(fut));
+}

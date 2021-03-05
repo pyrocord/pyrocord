@@ -1,13 +1,14 @@
+use super::controller;
 use super::state;
 use crate::pyrocord::http::client::HTTPClient;
-use crate::pyrocord::http::request::Request;
-use crate::pyrocord::http::routes::Route;
-use crate::pyrocord::models::gateway;
 use crate::pyrocord::utils::asyncio;
 use pyo3::prelude::*;
+use std::sync::Arc;
 
 #[pyclass]
-pub struct Client {}
+pub struct Client {
+    controller: Arc<controller::ClientController>,
+}
 
 impl Client {}
 
@@ -17,25 +18,23 @@ impl Client {
     pub fn new(token: String) -> Self {
         state::HTTP.set(HTTPClient::new(token));
 
-        Client {}
+        Client {
+            controller: Arc::new(controller::ClientController {}),
+        }
     }
 
-    fn gateway(&self) -> PyResult<PyObject> {
-        let response = state::HTTP
-            .get()
-            .request::<gateway::GatewayPayload>(Request {
-                body: None,
-                headers: None,
-                route: Route::GetGateway,
-            });
-        asyncio::wait(async {
-            let response = response.await;
-            match response {
-                Ok(response) => Ok(response),
-                Err(error) => {
-                    panic!("{:?}", error); // TODO: wrap in python error
-                }
-            }
+    pub fn start(&self) -> PyResult<PyObject> {
+        let controller = self.controller.clone();
+        asyncio::wait(async move {
+            controller.launch().await;
+            Ok(true)
+        })
+    }
+
+    pub fn run(&self) {
+        let controller = self.controller.clone();
+        asyncio::block(async {
+            controller.launch().await;
         })
     }
 }
