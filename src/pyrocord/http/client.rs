@@ -5,8 +5,8 @@ use reqwest::header::HeaderMap;
 use reqwest::{Client, Error};
 use serde::de::DeserializeOwned;
 
-const BASE_URL: &'static str = "https://discord.com/api/v8";
-const USER_AGENT: &'static str =
+const BASE_URL: &str = "https://discord.com/api/v8";
+const USER_AGENT: &str =
     "DiscordBot (https://github.com/pyrocord/pyrocord, 0.1.0) rustc/1.52";
 
 #[pyclass]

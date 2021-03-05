@@ -680,9 +680,9 @@ impl Route {
                 Method::POST,
                 format!("/channels/{channel_id}/webhooks", channel_id = channel_id),
             ),
-            Self::GetGateway => (Method::GET, format!("/gateway")),
-            Self::GetGatewayBot => (Method::GET, format!("/gateway/bot")),
-            Self::CreateGuild => (Method::POST, format!("/guilds")),
+            Self::GetGateway => (Method::GET, "/gateway".to_string()),
+            Self::GetGatewayBot => (Method::GET, "/gateway/bot".to_string()),
+            Self::CreateGuild => (Method::POST, "/guilds".to_string()),
             Self::GetTemplate(template_code) => (
                 Method::GET,
                 format!(
@@ -996,7 +996,7 @@ impl Route {
                 format!("/invites/{invite_code}", invite_code = invite_code),
             ),
             Self::GetCurrentApplicationInformation => {
-                (Method::GET, format!("/oauth2/applications/@me"))
+                (Method::GET, "/oauth2/applications/@me".to_string())
             }
             Self::DeletePurchaseDiscount(sku_id, user_id) => (
                 Method::DELETE,
@@ -1014,19 +1014,19 @@ impl Route {
                     user_id = user_id
                 ),
             ),
-            Self::GetCurrentUser => (Method::GET, format!("/users/@me")),
-            Self::ModifyCurrentUser => (Method::PATCH, format!("/users/@me")),
-            Self::GetUserDMs => (Method::GET, format!("/users/@me/channels")),
-            Self::CreateDM => (Method::POST, format!("/users/@me/channels")),
-            Self::CreateGroupDM => (Method::POST, format!("/users/@me/channels")),
-            Self::GetUserConnections => (Method::GET, format!("/users/@me/connections")),
-            Self::GetCurrentUserGuilds => (Method::GET, format!("/users/@me/guilds")),
+            Self::GetCurrentUser => (Method::GET, "/users/@me".to_string()),
+            Self::ModifyCurrentUser => (Method::PATCH, "/users/@me".to_string()),
+            Self::GetUserDMs => (Method::GET, "/users/@me/channels".to_string()),
+            Self::CreateDM => (Method::POST, "/users/@me/channels".to_string()),
+            Self::CreateGroupDM => (Method::POST, "/users/@me/channels".to_string()),
+            Self::GetUserConnections => (Method::GET, "/users/@me/connections".to_string()),
+            Self::GetCurrentUserGuilds => (Method::GET, "/users/@me/guilds".to_string()),
             Self::LeaveGuild(guild_id) => (
                 Method::DELETE,
                 format!("/users/@me/guilds/{guild_id}", guild_id = guild_id),
             ),
             Self::GetUser(user_id) => (Method::GET, format!("/users/{user_id}", user_id = user_id)),
-            Self::ListVoiceRegions => (Method::GET, format!("/voice/regions")),
+            Self::ListVoiceRegions => (Method::GET, "/voice/regions".to_string()),
             Self::CreateFollowupMessage(interaction_token) => (
                 Method::POST,
                 format!(

@@ -1,15 +1,10 @@
 mod pyrocord;
 
 use crate::pyrocord::client::client;
-use crate::pyrocord::client::client::Client;
 use pyo3::prelude::*;
-use pyo3::wrap_pyfunction;
-use pythonize::pythonize;
-use serde_json::to_string_pretty;
-
 
 #[pymodule]
-fn init_models(_py: Python, m: &PyModule) -> PyResult<()> {
+fn init_models(_py: Python, _m: &PyModule) -> PyResult<()> {
     Ok(())
 }
 
